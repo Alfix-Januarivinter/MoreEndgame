@@ -11,7 +11,7 @@
 		"homepage": "https://modrinth.com/project/more-endgame",
 		"sources": "https://github.com/Alfix-Januarivinter/MoreEndgame"
 	},
-	"license": "CC0-1.0",
+	"license": "CC-BY-SA-4.0",
 	"icon": "assets/moreendgame/icon.png",
 	"environment": "*",
 	"entrypoints": {
