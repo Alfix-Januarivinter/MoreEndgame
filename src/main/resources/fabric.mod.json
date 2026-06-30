@@ -1,18 +1,18 @@
 {
 	"schemaVersion": 1,
-	"id": "more-endgame",
+	"id": "moreendgame",
 	"version": "${version}",
 	"name": "More Endgame",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This mod adds tools that's over powered! Reaper sword, Divan pickaxe and Axe of The Trees.",
 	"authors": [
-		"Me!"
+		"Alfix"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/project/more-endgame",
+		"sources": "https://github.com/Alfix-Januarivinter/MoreEndgame"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/more-endgame/icon.png",
+	"icon": "assets/moreendgame/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -26,9 +26,9 @@
 		]
 	},
 	"mixins": [
-		"more-endgame.mixins.json",
+		"moreendgame.mixins.json",
 		{
-			"config": "more-endgame.client.mixins.json",
+			"config": "moreendgame.client.mixins.json",
 			"environment": "client"
 		}
 	],
