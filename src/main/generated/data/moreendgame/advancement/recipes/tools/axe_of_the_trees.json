@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_snow_block": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "moreendgame:axe_of_the_trees"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tree_heart": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:snow_block"
+            "items": "moreendgame:tree_heart"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "moreendgame:snow_block"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_snow_block"
+      "has_tree_heart"
     ]
   ],
   "rewards": {
     "recipes": [
-      "moreendgame:snow_block"
+      "moreendgame:axe_of_the_trees"
     ]
   }
 }

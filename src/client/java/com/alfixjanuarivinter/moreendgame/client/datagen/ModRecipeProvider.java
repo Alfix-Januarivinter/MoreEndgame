@@ -22,13 +22,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
-                shaped(RecipeCategory.DECORATIONS, ModItems.REAPER_SWORD)
+                shaped(RecipeCategory.COMBAT , ModItems.REAPER_SWORD)
                         .pattern("UUU")
                         .pattern("USU")
                         .pattern("UUU")
                         .define('S', Items.NETHERITE_SWORD)
                         .define('U', ModItems.UNDEAD_SPIRIT)
                         .unlockedBy(getHasName(ModItems.UNDEAD_SPIRIT), has(ModItems.UNDEAD_SPIRIT))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.AXE_OF_THE_TREES)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('S', Items.NETHERITE_AXE)
+                        .define('U', ModItems.TREE_HEART)
+                        .unlockedBy(getHasName(ModItems.TREE_HEART), has(ModItems.TREE_HEART))
                         .save(output);
 
             }

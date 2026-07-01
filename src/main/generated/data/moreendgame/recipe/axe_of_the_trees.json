@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:netherite_axe",
+    "U": "moreendgame:tree_heart"
+  },
+  "pattern": [
+    "UUU",
+    "USU",
+    "UUU"
+  ],
+  "result": {
+    "id": "moreendgame:axe_of_the_trees"
+  }
+}

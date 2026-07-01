@@ -23,6 +23,15 @@ public class ModItems {
             ReaperToolMaterial.REPAIRS_REAPER_ARMOR // repair items
     );
 
+    public static final ToolMaterial TREE_HEART_TOOL_MATERIAL = new ToolMaterial(
+            TreeHeartToolMaterial.INCORRECT_FOR_TREE_HEART_TOOL, // incorrect blocks for drops
+            4062, // durability
+            15.0F, // speed
+            5.0F, // attack damage bonus
+            16, // enchantment value
+            TreeHeartToolMaterial.REPAIRS_TREE_HEART_ARMOR // repair items
+    );
+
     public static final Item UNDEAD_SPIRIT = register("undead_spirit", Item::new, new Item.Properties());
     public static final Item TREE_HEART = register("tree_heart", Item::new, new Item.Properties());
     public static final Item CRYSTALLIZED_GEM = register("crystallized_gem", Item::new, new Item.Properties());
@@ -31,6 +40,12 @@ public class ModItems {
             "reaper_sword",
             Item::new,
             new Item.Properties().sword(REAPER_TOOL_MATERIAL, 6f, -2f)
+    );
+
+    public static final Item AXE_OF_THE_TREES = register(
+            "axe_of_the_trees",
+            Item::new,
+            new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f)
     );
 
     public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
@@ -48,6 +63,13 @@ public class ModItems {
             output.accept(UNDEAD_SPIRIT);
             output.accept(TREE_HEART);
             output.accept(CRYSTALLIZED_GEM);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
+            output.accept(REAPER_SWORD);
+            output.accept(AXE_OF_THE_TREES);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(output -> {
+            output.accept(AXE_OF_THE_TREES);
         });
     }
 
