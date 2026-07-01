@@ -13,7 +13,7 @@
 		"issues": "https://github.com/Alfix-Januarivinter/MoreEndgame/issues",
 		"wiki": "https://github.com/Alfix-Januarivinter/MoreEndgame/wiki"
 	},
-	"license": "CC-BY-SA-4.0",
+	"license": "ARR",
 	"icon": "assets/moreendgame/icon.png",
 	"environment": "*",
 	"entrypoints": {
