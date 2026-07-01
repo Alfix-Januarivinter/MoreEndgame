@@ -29,9 +29,7 @@ public class RareDropModifier {
             ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/dark_oak_log")),
             ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/mangrove_log")),
             ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/cherry_log")),
-            ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/pale_oak_log")),
-            ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/oak_wood")),
-            ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/spruce_wood"))
+            ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/pale_oak_log"))
     );
 
     // 3. Stone, deepslate, and all ores
