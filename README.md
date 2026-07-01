@@ -8,32 +8,46 @@
   
 <details>
 <summary>Reaper Sword</summary>
+  
 - Damage: 12 (Netherite: 8)
+  
 - Speed: 2 (Netherite: 1.6)
+ 
 - Durability: 4062 (Netherite: 2031)
 
 - Crafted from 8 Undead spirits and 1 Netherite sword
+  
 ![Reaper sword crafting recipe image](https://cdn.modrinth.com/data/cached_images/1dceadd2df77a671e06319ce4ec521f36e9c9384.png)
 </details>
 <details>
 <summary>Axe of The Trees</summary>
+  
 - Damage: 12 (Netherite: 10)
+  
 - Speed: 1 (Netherite: 1)
+ 
 - Durability: 4062 (Netherite: 2031)
+ 
 - Mining speed: 15 (Netherite: 9)
 
 - Crafted from 8 Tree hearts and 1 Netherite axe
+  
 ![Axe of The Trees recipe image](https://cdn.modrinth.com/data/cached_images/d06111661854ca38f1488f1c21cf7f67d505ae18.png)
 </details>
 
 <details>
 <summary>Reaper Sword</summary>
+  
 - Damage: 8 (Netherite: 6)
+  
 - Speed: 1.2 (Netherite: 1.2)
+ 
 - Durability: 4062 (Netherite: 2031)
+ 
 - Mining speed: 16 (Netherite: 9)
 
 - Crafted from 8 Crystallized gems and 1 Netherite pickaxe
+  
 ![Crystallized Pickaxe recipe image](https://cdn.modrinth.com/data/cached_images/977b795777b9cef3f895aedef26ba6869f9feeba.png)
 </details>
 
