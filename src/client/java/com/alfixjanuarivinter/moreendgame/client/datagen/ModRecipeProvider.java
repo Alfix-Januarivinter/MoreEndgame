@@ -40,6 +40,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModItems.TREE_HEART), has(ModItems.TREE_HEART))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.CRYSTALLIZED_PICKAXE)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('S', Items.NETHERITE_PICKAXE)
+                        .define('U', ModItems.CRYSTALLIZED_GEM)
+                        .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
+                        .save(output);
+
             }
         };
     }

@@ -32,6 +32,15 @@ public class ModItems {
             TreeHeartToolMaterial.REPAIRS_TREE_HEART_ARMOR // repair items
     );
 
+    public static final ToolMaterial CRYSTALLIZED_TOOL_MATERIAL = new ToolMaterial(
+            CrystallizedToolMaterial.INCORRECT_FOR_CRYSTALLIZED_TOOL, // incorrect blocks for drops
+            4062, // durability
+            16.0F, // speed
+            5.0F, // attack damage bonus
+            16, // enchantment value
+            CrystallizedToolMaterial.REPAIRS_CRYSTALLIZED_ARMOR // repair items
+    );
+
     public static final Item UNDEAD_SPIRIT = register("undead_spirit", Item::new, new Item.Properties());
     public static final Item TREE_HEART = register("tree_heart", Item::new, new Item.Properties());
     public static final Item CRYSTALLIZED_GEM = register("crystallized_gem", Item::new, new Item.Properties());
@@ -46,6 +55,12 @@ public class ModItems {
             "axe_of_the_trees",
             Item::new,
             new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f)
+    );
+
+    public static final Item CRYSTALLIZED_PICKAXE = register(
+            "crystallized_pickaxe",
+            Item::new,
+            new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f)
     );
 
     public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
@@ -70,6 +85,7 @@ public class ModItems {
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(output -> {
             output.accept(AXE_OF_THE_TREES);
+            output.accept(CRYSTALLIZED_PICKAXE);
         });
     }
 
