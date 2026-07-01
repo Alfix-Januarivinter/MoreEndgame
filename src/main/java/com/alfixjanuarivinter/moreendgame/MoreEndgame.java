@@ -1,6 +1,7 @@
 package com.alfixjanuarivinter.moreendgame;
 
 import com.alfixjanuarivinter.moreendgame.Items.ModItems;
+import com.alfixjanuarivinter.moreendgame.loot.RareDropModifier;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
@@ -16,6 +17,7 @@ public class MoreEndgame implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.initialize();
+		RareDropModifier.register();
 
 	}
 
