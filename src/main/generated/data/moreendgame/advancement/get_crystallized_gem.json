@@ -1,0 +1,29 @@
+{
+  "parent": "moreendgame:get_tree_heart",
+  "criteria": {
+    "got_crystallized_gem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:crystallized_gem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": "Aren't diamonds crystallized gems",
+    "icon": {
+      "id": "moreendgame:crystallized_gem"
+    },
+    "title": "Your First Crystallized Gem"
+  },
+  "requirements": [
+    [
+      "got_crystallized_gem"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

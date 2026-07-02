@@ -1,0 +1,29 @@
+{
+  "parent": "moreendgame:get_undead_spirit",
+  "criteria": {
+    "got_tree_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:tree_heart"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": "Wait I didn't know trees had hearts",
+    "icon": {
+      "id": "moreendgame:tree_heart"
+    },
+    "title": "Your First Tree Heart"
+  },
+  "requirements": [
+    [
+      "got_tree_heart"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

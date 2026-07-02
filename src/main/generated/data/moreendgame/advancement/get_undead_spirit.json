@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "got_undead_spirit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:undead_spirit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": "I wounder what power it possesses",
+    "icon": {
+      "id": "moreendgame:undead_spirit"
+    },
+    "title": "Your First Undead Spirit"
+  },
+  "requirements": [
+    [
+      "got_undead_spirit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

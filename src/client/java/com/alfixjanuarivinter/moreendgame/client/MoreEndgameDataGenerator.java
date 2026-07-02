@@ -1,5 +1,6 @@
 package com.alfixjanuarivinter.moreendgame.client;
 
+import com.alfixjanuarivinter.moreendgame.client.datagen.ModAdvancementProvider;
 import com.alfixjanuarivinter.moreendgame.client.datagen.ModModelProvider;
 import com.alfixjanuarivinter.moreendgame.client.datagen.ModRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -12,6 +13,7 @@ public class MoreEndgameDataGenerator implements DataGeneratorEntrypoint {
 
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModAdvancementProvider::new);
 
 
 	}
