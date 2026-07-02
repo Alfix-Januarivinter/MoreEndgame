@@ -53,7 +53,7 @@ public class ModItems {
 
     public static final Item AXE_OF_THE_TREES = register(
             "axe_of_the_trees",
-            Item::new,
+            AxeOfTheTreesItem::new,
             new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f) .repairable(TREE_HEART)
     );
 

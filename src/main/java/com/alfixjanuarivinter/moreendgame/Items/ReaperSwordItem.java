@@ -13,12 +13,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
+@SuppressWarnings("deprecation")
 public class ReaperSwordItem extends Item {
 
     private static final int COOLDOWN_TICKS = 600;
     private static final float SWEEP_DAMAGE = 30.0F;
     private static final int SWEEP_RADIUS = 5;
-    private static final int DURABILITY_COST = 2;
+    private static final int DURABILITY_COST = 30;
 
     public ReaperSwordItem(Properties properties) {
         super(properties);
