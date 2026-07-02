@@ -59,7 +59,7 @@ public class ModItems {
 
     public static final Item CRYSTALLIZED_PICKAXE = register(
             "crystallized_pickaxe",
-            Item::new,
+            CrystallizedPickaxeItem::new,
             new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f) .repairable(CRYSTALLIZED_GEM)
     );
 
