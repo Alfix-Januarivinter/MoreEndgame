@@ -47,20 +47,20 @@ public class ModItems {
 
     public static final Item REAPER_SWORD = register(
             "reaper_sword",
-            Item::new,
-            new Item.Properties().sword(REAPER_TOOL_MATERIAL, 6f, -2f)
+            ReaperSwordItem::new,
+            new Item.Properties().sword(REAPER_TOOL_MATERIAL, 6f, -2f) .repairable(UNDEAD_SPIRIT)
     );
 
     public static final Item AXE_OF_THE_TREES = register(
             "axe_of_the_trees",
             Item::new,
-            new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f)
+            new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f) .repairable(TREE_HEART)
     );
 
     public static final Item CRYSTALLIZED_PICKAXE = register(
             "crystallized_pickaxe",
             Item::new,
-            new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f)
+            new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f) .repairable(CRYSTALLIZED_GEM)
     );
 
     public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
