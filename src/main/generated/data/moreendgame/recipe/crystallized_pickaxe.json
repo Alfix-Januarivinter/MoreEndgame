@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:netherite_pickaxe",
+    "U": "moreendgame:crystallized_gem"
+  },
+  "pattern": [
+    "UUU",
+    "USU",
+    "UUU"
+  ],
+  "result": {
+    "count": 1,
+    "id": "moreendgame:crystallized_pickaxe"
+  }
+}
