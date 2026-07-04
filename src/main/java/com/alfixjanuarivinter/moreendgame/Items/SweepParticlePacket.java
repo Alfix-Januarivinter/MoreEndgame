@@ -5,13 +5,13 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 
 public record SweepParticlePacket(double x, double y, double z, float yRot) implements CustomPacketPayload {
 
     public static final Type<SweepParticlePacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath("moreendgame", "sweep_particle"));
+            new Type<>(Identifier.fromNamespaceAndPath("moreendgame", "sweep_particle"));
 
     public static final StreamCodec<FriendlyByteBuf, SweepParticlePacket> CODEC =
             StreamCodec.of(
