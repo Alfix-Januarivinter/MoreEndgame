@@ -7,12 +7,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +31,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.UNDEAD_SPIRIT, // The display icon
                         Component.literal("Your First Undead Spirit"), // The title
                         Component.literal("I wounder what power it possesses"), // The description
-                        Identifier.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
+                        ResourceLocation.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
                         AdvancementType.TASK, // TASK, CHALLENGE, or GOAL
                         true, // Show the toast when completing it
                         true, // Announce it to chat
@@ -40,7 +40,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_undead_spirit", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.UNDEAD_SPIRIT))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_undead_spirit").toString());
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_undead_spirit").toString());
 
         AdvancementHolder getTreeHeart = Advancement.Builder.advancement()
                 .parent(getUndeadSpirit)
@@ -48,7 +48,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.TREE_HEART, // The display icon
                         Component.literal("Your First Tree Heart"), // The title
                         Component.literal("Wait I didn't know trees had hearts"), // The description
-                        Identifier.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
+                        ResourceLocation.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
                         AdvancementType.TASK, // TASK, CHALLENGE, or GOAL
                         true, // Show the toast when completing it
                         true, // Announce it to chat
@@ -57,7 +57,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_tree_heart", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TREE_HEART))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_tree_heart").toString());
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_tree_heart").toString());
 
         AdvancementHolder getCrystallizedGem = Advancement.Builder.advancement()
                 .parent(getTreeHeart)
@@ -65,7 +65,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.CRYSTALLIZED_GEM, // The display icon
                         Component.literal("Your First Crystallized Gem"), // The title
                         Component.literal("Aren't diamonds crystallized gems"), // The description
-                        Identifier.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
+                        ResourceLocation.withDefaultNamespace("gui/advancements/backgrounds/adventure"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
                         AdvancementType.TASK, // TASK, CHALLENGE, or GOAL
                         true, // Show the toast when completing it
                         true, // Announce it to chat
@@ -74,7 +74,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_crystallized_gem", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CRYSTALLIZED_GEM))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_crystallized_gem").toString());
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_crystallized_gem").toString());
 
         Advancement.Builder.advancement()
                 .addCriterion("got_reaper_sword", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.REAPER_SWORD))
@@ -93,7 +93,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         true,
                         false
                 )
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_ultimate_tools").toString());
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_ultimate_tools").toString());
 
     }
 }
