@@ -42,7 +42,7 @@
 </details>
 
 <details>
-<summary>Reaper Sword</summary>
+<summary>Crystallized Pickaxe</summary>
   
 - Damage: 8 (Netherite: 6)
   
