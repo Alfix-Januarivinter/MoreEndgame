@@ -10,8 +10,7 @@
 	"contact": {
 		"homepage": "https://modrinth.com/mod/more-endgame",
 		"sources": "https://github.com/Alfix-Januarivinter/MoreEndgame",
-		"issues": "https://github.com/Alfix-Januarivinter/MoreEndgame/issues",
-		"wiki": "https://github.com/Alfix-Januarivinter/MoreEndgame/wiki"
+		"issues": "https://github.com/Alfix-Januarivinter/MoreEndgame/issues"
 	},
 	"license": "CC-BY-SA-4.0",
 	"icon": "assets/moreendgame/icon.png",
@@ -34,6 +33,17 @@
 			"environment": "client"
 		}
 	],
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.com/invite/ETTr37p38R",
+				"modmenu.github_releases" : "https://github.com/Alfix-Januarivinter/MoreEndgame/releases",
+				"modmenu.modrinth" : "https://modrinth.com/mod/more-endgame"
+			},
+			"badges": [ "adventure", "equipment", "magic", "utility" ],
+			"update_checker": true
+		}
+	},
 	"depends": {
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.2",

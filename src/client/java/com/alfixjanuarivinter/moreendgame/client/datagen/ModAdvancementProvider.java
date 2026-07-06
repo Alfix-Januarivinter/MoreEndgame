@@ -7,8 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.predicates.ItemPredicate;
-import net.minecraft.advancements.triggers.ConsumeItemTrigger;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -16,7 +14,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
