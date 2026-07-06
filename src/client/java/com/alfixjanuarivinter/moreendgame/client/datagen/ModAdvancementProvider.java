@@ -2,12 +2,12 @@ package com.alfixjanuarivinter.moreendgame.client.datagen;
 
 import com.alfixjanuarivinter.moreendgame.Items.ModItems;
 import com.alfixjanuarivinter.moreendgame.MoreEndgame;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends FabricAdvancementProvider {
-    public ModAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public ModAdvancementProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
@@ -40,7 +40,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_undead_spirit", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.UNDEAD_SPIRIT))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_undead_spirit").toString());
+                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_undead_spirit"));
 
         AdvancementHolder getTreeHeart = Advancement.Builder.advancement()
                 .parent(getUndeadSpirit)
@@ -57,7 +57,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_tree_heart", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.TREE_HEART))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_tree_heart").toString());
+                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_tree_heart"));
 
         AdvancementHolder getCrystallizedGem = Advancement.Builder.advancement()
                 .parent(getTreeHeart)
@@ -74,7 +74,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
                 .addCriterion("got_crystallized_gem", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CRYSTALLIZED_GEM))
                 // Give the advancement an id
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_crystallized_gem").toString());
+                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_crystallized_gem"));
 
         Advancement.Builder.advancement()
                 .addCriterion("got_reaper_sword", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.REAPER_SWORD))
@@ -93,7 +93,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         true,
                         false
                 )
-                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "get_ultimate_tools").toString());
+                .save(consumer, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "ultimate_tools"));
 
     }
 }
