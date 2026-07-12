@@ -7,9 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.*;
 
 import java.util.function.Function;
 
@@ -78,6 +76,19 @@ public class ModItems {
             output.accept(UNDEAD_SPIRIT);
             output.accept(TREE_HEART);
             output.accept(CRYSTALLIZED_GEM);
+            var lookupProvider = output.getContext().holders();
+            lookupProvider.lookup(Registries.ENCHANTMENT).flatMap(enchantmentRegistry -> enchantmentRegistry.get(ResourceKey.create(
+                    Registries.ENCHANTMENT,
+                    Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "cooldown_reduction")
+            ))).ifPresent(enchantmentHolder -> {
+                int maxLevel = enchantmentHolder.value().getMaxLevel();
+
+                for (int level = 1; level <= maxLevel; level++) {
+                    ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+                    book.enchant(enchantmentHolder, level);
+                    output.accept(book);
+                }
+            });
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(REAPER_SWORD);

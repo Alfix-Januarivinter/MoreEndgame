@@ -1,5 +1,6 @@
 package com.alfixjanuarivinter.moreendgame.Items;
 
+import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,7 +19,7 @@ import java.util.*;
 public class AxeOfTheTreesItem extends Item {
 
     private static final int MAX_LOGS = 256;
-    private static final int COOLDOWN_TICKS = 600;
+    private static final int BASE_COOLDOWN = 600;
 
     public AxeOfTheTreesItem(Properties properties) {
         super(properties);
@@ -33,9 +34,8 @@ public class AxeOfTheTreesItem extends Item {
 
         if (player == null) return InteractionResult.PASS;
 
-        // Only activate when sneaking
         if (!player.isShiftKeyDown()) {
-            return InteractionResult.PASS;   // allow normal axe usage (stripping, etc.)
+            return InteractionResult.PASS;
         }
 
         if (level.isClientSide()) {
@@ -51,7 +51,7 @@ public class AxeOfTheTreesItem extends Item {
             return InteractionResult.PASS;
         }
 
-        // Find all connected logs (BFS)
+        // BFS tree chopping
         Set<BlockPos> logs = new HashSet<>();
         Queue<BlockPos> queue = new LinkedList<>();
         queue.add(clickedPos);
@@ -76,17 +76,19 @@ public class AxeOfTheTreesItem extends Item {
             }
         }
 
-        // Break every log and apply durability cost
+        // Break logs and apply durability cost
         for (BlockPos pos : logs) {
             if (stack.isEmpty()) break;
             level.destroyBlock(pos, true, player);
-            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);   // Unbreaking respected
+            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
         }
 
-        // Single wood‑breaking sound
-        level.playSound(null, clickedPos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+        // Cooldown – reduced by enchantment
+        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
 
-        player.getCooldowns().addCooldown(stack, COOLDOWN_TICKS);
+        // Sound
+        level.playSound(null, clickedPos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
 
         return InteractionResult.CONSUME;
     }

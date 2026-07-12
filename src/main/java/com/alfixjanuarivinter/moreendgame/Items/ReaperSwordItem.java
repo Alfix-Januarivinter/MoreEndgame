@@ -1,5 +1,6 @@
 package com.alfixjanuarivinter.moreendgame.Items;
 
+import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,10 +17,10 @@ import net.minecraft.world.phys.AABB;
 @SuppressWarnings("deprecation")
 public class ReaperSwordItem extends Item {
 
-    private static final int COOLDOWN_TICKS = 600;
     private static final float SWEEP_DAMAGE = 30.0F;
     private static final int SWEEP_RADIUS = 5;
     private static final int DURABILITY_COST = 30;
+    private static final int BASE_COOLDOWN = 600;
 
     public ReaperSwordItem(Properties properties) {
         super(properties);
@@ -49,8 +50,9 @@ public class ReaperSwordItem extends Item {
         // Durability cost
         stack.hurtAndBreak(DURABILITY_COST, player, EquipmentSlot.MAINHAND);
 
-        // Cooldown
-        player.getCooldowns().addCooldown(stack, COOLDOWN_TICKS);
+        // Cooldown – reduced by enchantment
+        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
 
         // Sound
         level.playSound(null, player.getX(), player.getY(), player.getZ(),

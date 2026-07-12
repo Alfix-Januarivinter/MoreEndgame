@@ -1,5 +1,6 @@
 package com.alfixjanuarivinter.moreendgame.Items;
 
+import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -16,20 +17,20 @@ import net.minecraft.world.phys.Vec3;
 
 public class CrystallizedPickaxeItem extends Item {
 
-    private static final int COOLDOWN_TICKS = 200;
+    private static final int BASE_COOLDOWN = 200;
 
     public CrystallizedPickaxeItem(Properties properties) {
         super(properties);
     }
 
     private void mineArea(Level level, Player player, ItemStack stack, BlockPos center) {
-        Direction facing = Direction.fromYRot(player.getYRot());   // depth
-        Direction widthDir = facing.getClockWise();                // left/right
-        Direction heightDir = Direction.UP;                        // up/down
+        Direction facing = Direction.fromYRot(player.getYRot());
+        Direction widthDir = facing.getClockWise();
+        Direction heightDir = Direction.UP;
 
-        int depthStart = -2, depthEnd = 1;   // 4 blocks deep (forward/back)
-        int widthStart = -2, widthEnd = 1;   // 4 blocks wide
-        int heightStart = -1, heightEnd = 2; // 4 blocks tall, shifted slightly upwards
+        int depthStart = -2, depthEnd = 1;
+        int widthStart = -2, widthEnd = 1;
+        int heightStart = -1, heightEnd = 2;
 
         for (int d = depthStart; d <= depthEnd; d++) {
             for (int w = widthStart; w <= widthEnd; w++) {
@@ -65,7 +66,11 @@ public class CrystallizedPickaxeItem extends Item {
         BlockPos center = BlockPos.containing(eye.add(look.scale(4.0)));
 
         mineArea(level, player, stack, center);
-        player.getCooldowns().addCooldown(stack, COOLDOWN_TICKS);
+
+        // Apply cooldown with enchantment reduction
+        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
+
         return InteractionResult.CONSUME;
     }
 
@@ -80,7 +85,10 @@ public class CrystallizedPickaxeItem extends Item {
 
         BlockPos center = context.getClickedPos();
         mineArea(context.getLevel(), player, stack, center);
-        player.getCooldowns().addCooldown(stack, COOLDOWN_TICKS);
+
+        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
+
         return InteractionResult.CONSUME;
     }
 }
