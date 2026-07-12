@@ -33,22 +33,18 @@ public class AxeOfTheTreesItem extends Item {
         ItemStack stack = context.getItemInHand();
 
         if (player == null) return InteractionResult.PASS;
+        if (!player.isShiftKeyDown()) return InteractionResult.PASS;
 
-        if (!player.isShiftKeyDown()) {
-            return InteractionResult.PASS;
-        }
+        BlockState clickedState = level.getBlockState(clickedPos);
+        if (!clickedState.is(BlockTags.LOGS)) return InteractionResult.PASS;
+        if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.PASS;
+
+        // Apply cooldown on both sides early to avoid client visual overlay desync
+        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
 
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
-        }
-
-        BlockState clickedState = level.getBlockState(clickedPos);
-        if (!clickedState.is(BlockTags.LOGS)) {
-            return InteractionResult.PASS;
-        }
-
-        if (player.getCooldowns().isOnCooldown(stack)) {
-            return InteractionResult.PASS;
         }
 
         // BFS tree chopping
@@ -82,10 +78,6 @@ public class AxeOfTheTreesItem extends Item {
             level.destroyBlock(pos, true, player);
             stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
         }
-
-        // Cooldown – reduced by enchantment
-        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
-        player.getCooldowns().addCooldown(stack, cooldown);
 
         // Sound
         level.playSound(null, clickedPos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);

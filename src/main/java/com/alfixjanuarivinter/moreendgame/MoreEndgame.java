@@ -21,7 +21,6 @@ public class MoreEndgame implements ModInitializer {
 		ModItems.initialize();
 		RareDropModifier.register();
 		ModNetwork.register();
-		CooldownHelper.register();
 
 	}
 

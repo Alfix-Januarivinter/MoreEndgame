@@ -58,6 +58,11 @@ public class CrystallizedPickaxeItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (!player.isShiftKeyDown()) return InteractionResult.PASS;
         if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.PASS;
+
+        // Apply cooldown on both sides early to avoid client visual overlay desync
+        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
+
         if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         // Center 4 blocks in front of the player's eyes
@@ -67,10 +72,6 @@ public class CrystallizedPickaxeItem extends Item {
 
         mineArea(level, player, stack, center);
 
-        // Apply cooldown with enchantment reduction
-        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
-        player.getCooldowns().addCooldown(stack, cooldown);
-
         return InteractionResult.CONSUME;
     }
 
@@ -78,16 +79,20 @@ public class CrystallizedPickaxeItem extends Item {
     public InteractionResult useOn(net.minecraft.world.item.context.UseOnContext context) {
         Player player = context.getPlayer();
         if (player == null || !player.isShiftKeyDown()) return InteractionResult.PASS;
+
         ItemStack stack = context.getItemInHand();
         if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.PASS;
 
-        if (context.getLevel().isClientSide()) return InteractionResult.SUCCESS;
+        Level level = context.getLevel();
+
+        // Apply cooldown on both sides early to avoid client visual overlay desync
+        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
+
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         BlockPos center = context.getClickedPos();
-        mineArea(context.getLevel(), player, stack, center);
-
-        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
-        player.getCooldowns().addCooldown(stack, cooldown);
+        mineArea(level, player, stack, center);
 
         return InteractionResult.CONSUME;
     }

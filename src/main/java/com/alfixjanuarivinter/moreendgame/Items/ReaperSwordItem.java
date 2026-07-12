@@ -34,12 +34,16 @@ public class ReaperSwordItem extends Item {
             return InteractionResult.PASS;
         }
 
+        // 1. Calculate and set the cooldown identically on BOTH sides to prevent visual desync
+        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        player.getCooldowns().addCooldown(stack, cooldown);
+
         if (level.isClientSide()) {
             player.swing(hand);
             return InteractionResult.SUCCESS;
         }
 
-        // Damage all mobs in a 5‑block radius
+        // Damage all mobs in a 5‑block radius (Server Side Only)
         AABB area = player.getBoundingBox().inflate(SWEEP_RADIUS);
         level.getEntitiesOfClass(LivingEntity.class, area,
                         entity -> entity != player && entity.isAlive())
@@ -50,11 +54,7 @@ public class ReaperSwordItem extends Item {
         // Durability cost
         stack.hurtAndBreak(DURABILITY_COST, player, EquipmentSlot.MAINHAND);
 
-        // Cooldown – reduced by enchantment
-        int cooldown = CooldownHelper.getModifiedCooldown(stack, BASE_COOLDOWN);
-        player.getCooldowns().addCooldown(stack, cooldown);
-
-        // Sound
+        // Sound & Particles
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
 
