@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:paper",
+    "U": "moreendgame:tree_heart"
+  },
+  "pattern": [
+    "UUU",
+    "USU",
+    "UUU"
+  ],
+  "result": {
+    "id": "moreendgame:tree_scroll"
+  }
+}

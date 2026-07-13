@@ -6,5 +6,8 @@
   "item.moreendgame.axe_of_the_trees": "Axe Of The Trees",
   "item.moreendgame.crystallized_pickaxe": "Crystallized Pickaxe",
   "enchantment.moreendgame.cooldown_reduction": "Cooldown Reduction",
-  "item.moreendgame.cooldown_reduction_book": "Enchantment Book"
+  "item.moreendgame.cooldown_reduction_book": "Enchantment Book",
+  "item.moreendgame.reaper_scroll": "Reaper Scroll",
+  "item.moreendgame.tree_scroll": "Tree Scroll",
+  "item.moreendgame.crystallized_scroll": "Crystallized Scroll"
 }

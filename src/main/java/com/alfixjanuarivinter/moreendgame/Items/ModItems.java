@@ -13,30 +13,15 @@ import java.util.function.Function;
 
 public class ModItems {
     public static final ToolMaterial REAPER_TOOL_MATERIAL = new ToolMaterial(
-            ReaperToolMaterial.INCORRECT_FOR_REAPER_TOOL, // incorrect blocks for drops
-            4062, // durability
-            9.0F, // speed
-            5.0F, // attack damage bonus
-            16, // enchantment value
-            ReaperToolMaterial.REPAIRS_REAPER_ARMOR // repair items
+            ReaperToolMaterial.INCORRECT_FOR_REAPER_TOOL, 4062, 9.0F, 5.0F, 16, ReaperToolMaterial.REPAIRS_REAPER_ARMOR
     );
 
     public static final ToolMaterial TREE_HEART_TOOL_MATERIAL = new ToolMaterial(
-            TreeHeartToolMaterial.INCORRECT_FOR_TREE_HEART_TOOL, // incorrect blocks for drops
-            4062, // durability
-            15.0F, // speed
-            5.0F, // attack damage bonus
-            16, // enchantment value
-            TreeHeartToolMaterial.REPAIRS_TREE_HEART_ARMOR // repair items
+            TreeHeartToolMaterial.INCORRECT_FOR_TREE_HEART_TOOL, 4062, 15.0F, 5.0F, 16, TreeHeartToolMaterial.REPAIRS_TREE_HEART_ARMOR
     );
 
     public static final ToolMaterial CRYSTALLIZED_TOOL_MATERIAL = new ToolMaterial(
-            CrystallizedToolMaterial.INCORRECT_FOR_CRYSTALLIZED_TOOL, // incorrect blocks for drops
-            4062, // durability
-            16.0F, // speed
-            5.0F, // attack damage bonus
-            16, // enchantment value
-            CrystallizedToolMaterial.REPAIRS_CRYSTALLIZED_ARMOR // repair items
+            CrystallizedToolMaterial.INCORRECT_FOR_CRYSTALLIZED_TOOL, 4062, 16.0F, 5.0F, 16, CrystallizedToolMaterial.REPAIRS_CRYSTALLIZED_ARMOR
     );
 
     public static final Item UNDEAD_SPIRIT = register("undead_spirit", Item::new, new Item.Properties());
@@ -44,22 +29,22 @@ public class ModItems {
     public static final Item CRYSTALLIZED_GEM = register("crystallized_gem", Item::new, new Item.Properties());
 
     public static final Item REAPER_SWORD = register(
-            "reaper_sword",
-            ReaperSwordItem::new,
-            new Item.Properties().sword(REAPER_TOOL_MATERIAL, 6f, -2f) .repairable(UNDEAD_SPIRIT)
+            "reaper_sword", ReaperSwordItem::new, new Item.Properties().sword(REAPER_TOOL_MATERIAL, 6f, -2f).repairable(UNDEAD_SPIRIT)
     );
 
     public static final Item AXE_OF_THE_TREES = register(
             "axe_of_the_trees",
-            AxeOfTheTreesItem::new,
-            new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f) .repairable(TREE_HEART)
+            properties -> new AxeOfTheTreesItem(TREE_HEART_TOOL_MATERIAL, 6f, -3f, properties),
+            new Item.Properties().axe(TREE_HEART_TOOL_MATERIAL, 6f, -3f).repairable(TREE_HEART)
     );
 
     public static final Item CRYSTALLIZED_PICKAXE = register(
-            "crystallized_pickaxe",
-            CrystallizedPickaxeItem::new,
-            new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f) .repairable(CRYSTALLIZED_GEM)
+            "crystallized_pickaxe", CrystallizedPickaxeItem::new, new Item.Properties().pickaxe(CRYSTALLIZED_TOOL_MATERIAL, 2f, -2.8f).repairable(CRYSTALLIZED_GEM)
     );
+
+    public static final Item REAPER_SCROLL = register("reaper_scroll", Item::new, new Item.Properties().stacksTo(1));
+    public static final Item TREE_SCROLL = register("tree_scroll", Item::new, new Item.Properties().stacksTo(1));
+    public static final Item CRYSTALLIZED_SCROLL = register("crystallized_scroll", Item::new, new Item.Properties().stacksTo(1));
 
     public static <T extends Item> T register(String name, Function<Item.Properties, T> itemFactory, Item.Properties settings) {
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, name));
@@ -89,6 +74,9 @@ public class ModItems {
                     output.accept(book);
                 }
             });
+            output.accept(REAPER_SCROLL);
+            output.accept(TREE_SCROLL);
+            output.accept(CRYSTALLIZED_SCROLL);
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(REAPER_SWORD);

@@ -3,7 +3,8 @@
 	"package": "com.alfixjanuarivinter.moreendgame.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"AnvilMenuMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -49,6 +49,33 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.REAPER_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.UNDEAD_SPIRIT)
+                        .define('S', Items.PAPER)
+                        .unlockedBy(getHasName(ModItems.UNDEAD_SPIRIT), has(ModItems.UNDEAD_SPIRIT))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.TREE_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.TREE_HEART)
+                        .define('S', Items.PAPER)
+                        .unlockedBy(getHasName(ModItems.TREE_HEART), has(ModItems.TREE_HEART))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.CRYSTALLIZED_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.CRYSTALLIZED_GEM)
+                        .define('S', Items.PAPER)
+                        .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
+                        .save(output);
+
             }
         };
     }

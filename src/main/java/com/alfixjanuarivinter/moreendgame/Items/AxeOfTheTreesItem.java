@@ -1,87 +1,153 @@
 package com.alfixjanuarivinter.moreendgame.Items;
 
 import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
+import java.util.function.Consumer;
 
-public class AxeOfTheTreesItem extends Item {
+public class AxeOfTheTreesItem extends AxeItem {
 
-    private static final int MAX_LOGS = 256;
     private static final int BASE_COOLDOWN = 600;
 
-    public AxeOfTheTreesItem(Properties properties) {
-        super(properties);
+    public AxeOfTheTreesItem(ToolMaterial material, float attackDamage, float attackSpeed, Properties properties) {
+        super(material, attackDamage, attackSpeed, properties);
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-        Player player = context.getPlayer();
-        BlockPos clickedPos = context.getClickedPos();
+        BlockPos origin = context.getClickedPos();
+        BlockState state = level.getBlockState(origin);
         ItemStack stack = context.getItemInHand();
+        var player = context.getPlayer();
 
-        if (player == null) return InteractionResult.PASS;
-        if (!player.isShiftKeyDown()) return InteractionResult.PASS;
-
-        BlockState clickedState = level.getBlockState(clickedPos);
-        if (!clickedState.is(BlockTags.LOGS)) return InteractionResult.PASS;
-        if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.PASS;
-
-        // Apply cooldown on both sides early to avoid client visual overlay desync
-        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
-        player.getCooldowns().addCooldown(stack, cooldown);
-
-        if (level.isClientSide()) {
-            return InteractionResult.SUCCESS;
+        if (player == null || player.getCooldowns().isOnCooldown(stack)) {
+            return InteractionResult.PASS;
         }
 
-        // BFS tree chopping
-        Set<BlockPos> logs = new HashSet<>();
-        Queue<BlockPos> queue = new LinkedList<>();
-        queue.add(clickedPos);
+        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
 
-        while (!queue.isEmpty() && logs.size() < MAX_LOGS) {
-            BlockPos current = queue.poll();
-            if (!logs.add(current)) continue;
+        // UPDATED: Mapped to unified lower-case keys
+        boolean hasLeafScroll = tag.getBoolean("hascrystallizedscroll").orElse(false);
+        boolean hasPlankScroll = tag.getBoolean("hasreaperscroll").orElse(false);
 
-            BlockState state = level.getBlockState(current);
-            if (!state.is(BlockTags.LOGS)) continue;
+        boolean isLog = state.is(BlockTags.LOGS);
+        boolean isPlank = state.is(BlockTags.PLANKS);
 
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    for (int dz = -1; dz <= 1; dz++) {
-                        if (dx == 0 && dy == 0 && dz == 0) continue;
-                        BlockPos neighbor = current.offset(dx, dy, dz);
-                        if (!logs.contains(neighbor) && level.getBlockState(neighbor).is(BlockTags.LOGS)) {
-                            queue.add(neighbor);
+        if (!isLog && !(isPlank && hasPlankScroll)) {
+            return InteractionResult.PASS;
+        }
+
+        int brokenCount = 1;
+
+        if (!level.isClientSide()) {
+            int maxBlocks = (isPlank && hasPlankScroll) ? 128 : 256;
+            Queue<BlockPos> queue = new LinkedList<>();
+            Set<BlockPos> visited = new HashSet<>();
+            List<BlockPos> targets = new ArrayList<>();
+
+            queue.add(origin);
+            visited.add(origin);
+
+            while (!queue.isEmpty() && targets.size() < maxBlocks) {
+                BlockPos current = queue.poll();
+                targets.add(current);
+
+                for (BlockPos neighbor : BlockPos.betweenClosed(current.offset(-1, -1, -1), current.offset(1, 1, 1))) {
+                    BlockPos immutableNeighbor = neighbor.immutable();
+                    if (!visited.contains(immutableNeighbor)) {
+                        BlockState neighborState = level.getBlockState(immutableNeighbor);
+                        boolean match = isLog ? neighborState.is(BlockTags.LOGS) : neighborState.is(BlockTags.PLANKS);
+
+                        if (match) {
+                            visited.add(immutableNeighbor);
+                            queue.add(immutableNeighbor);
+                        }
+                    }
+                }
+            }
+
+            brokenCount = targets.size();
+            targets.forEach(pos -> level.destroyBlock(pos, true, player));
+
+            if (isLog && hasLeafScroll) {
+                Queue<BlockPos> leafQueue = new LinkedList<>();
+                Set<BlockPos> leafVisited = new HashSet<>();
+                int leafCount = 0;
+
+                for (BlockPos logPos : targets) {
+                    leafQueue.add(logPos);
+                }
+
+                while (!leafQueue.isEmpty() && leafCount < 256) {
+                    BlockPos currentLeaf = leafQueue.poll();
+                    for (BlockPos neighbor : BlockPos.betweenClosed(currentLeaf.offset(-1, -1, -1), currentLeaf.offset(1, 1, 1))) {
+                        BlockPos immutableNeighbor = neighbor.immutable();
+                        if (!leafVisited.contains(immutableNeighbor)) {
+                            BlockState neighborState = level.getBlockState(immutableNeighbor);
+                            if (neighborState.is(BlockTags.LEAVES)) {
+                                leafVisited.add(immutableNeighbor);
+                                leafQueue.add(immutableNeighbor);
+                                level.destroyBlock(immutableNeighbor, true, player);
+                                leafCount++;
+                            }
                         }
                     }
                 }
             }
         }
 
-        // Break logs and apply durability cost
-        for (BlockPos pos : logs) {
-            if (stack.isEmpty()) break;
-            level.destroyBlock(pos, true, player);
-            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        float scrollMultiplier = 1.0f;
+        if (hasLeafScroll) scrollMultiplier -= 0.15f;
+        if (hasPlankScroll) scrollMultiplier -= 0.15f;
+        cooldown = (int) (cooldown * scrollMultiplier);
+
+        player.getCooldowns().addCooldown(stack, Math.max(1, cooldown));
+        stack.hurtAndBreak(brokenCount, player, EquipmentSlot.MAINHAND);
+
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
+        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+
+        boolean hasLeafScroll = tag.getBoolean("hascrystallizedscroll").orElse(false);
+        boolean hasPlankScroll = tag.getBoolean("hasreaperscroll").orElse(false);
+
+        if (hasLeafScroll || hasPlankScroll) {
+            textConsumer.accept(Component.literal("Applied Upgrades:").withStyle(ChatFormatting.GOLD));
+
+            if (hasLeafScroll) {
+                textConsumer.accept(Component.literal(" - Crystallized Scroll Upgrade (Also destroys Leaves)").withStyle(ChatFormatting.GREEN));
+            }
+            if (hasPlankScroll) {
+                textConsumer.accept(Component.literal(" - Reaper Scroll Upgrade (Destroys Planks)").withStyle(ChatFormatting.AQUA));
+            }
+        } else {
+            textConsumer.accept(Component.literal("No upgrades applied.").withStyle(ChatFormatting.GRAY));
         }
 
-        // Sound
-        level.playSound(null, clickedPos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
-
-        return InteractionResult.CONSUME;
+        super.appendHoverText(stack, context, displayComponent, textConsumer, tooltipFlag);
     }
 }
