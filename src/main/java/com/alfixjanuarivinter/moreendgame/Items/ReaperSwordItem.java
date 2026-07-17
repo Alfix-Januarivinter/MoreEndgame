@@ -113,7 +113,6 @@ public class ReaperSwordItem extends Item {
         var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
 
-        // FIXED: Added .orElse(false) here as well
         boolean hasRegen = tag.getBoolean("hascrystallizedscroll").orElse(false);
         boolean hasTeleport = tag.getBoolean("hastreescroll").orElse(false);
 
