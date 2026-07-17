@@ -1,8 +1,8 @@
 package com.alfixjanuarivinter.moreendgame;
 
+import com.alfixjanuarivinter.moreendgame.Blocks.ModBlocks;
 import com.alfixjanuarivinter.moreendgame.Items.ModItems;
 import com.alfixjanuarivinter.moreendgame.Items.ModNetwork;
-import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
 import com.alfixjanuarivinter.moreendgame.loot.RareDropModifier;
 import net.fabricmc.api.ModInitializer;
 
@@ -21,6 +21,7 @@ public class MoreEndgame implements ModInitializer {
 		ModItems.initialize();
 		RareDropModifier.register();
 		ModNetwork.register();
+		ModBlocks.initialize();
 
 	}
 
