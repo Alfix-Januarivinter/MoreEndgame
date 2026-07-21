@@ -79,10 +79,25 @@ The mod also has advancements!
 
 ![More Endgame advancements image](https://cdn.modrinth.com/data/cached_images/825b55732d54438bee18d861c55f8a3112fa3fd9.png)
 
+**Each Tool has each own scroll!**
+
+Reaper sword has Reaper scroll.
+
+It can't be applied to the Reaper sword, because it already has the ability. But it can be applied to the Crystallized pickaxe and the Axe of the Trees, giving them a new ability and reducing the cooldown of the tools abilities.
+
+Crystallized pickaxe has Crystallized scroll.
+
+It can't be applied to the Crystallized pickaxe, because it already has the ability. But it can be applied to the Reaper Sword and the Axe of the Trees, giving them a new ability and reducing the cooldown of the tools abilities.
+
+Axe of the Trees has Tree scroll.
+
+It can't be applied to the Axe of the Trees, because it already has the ability. But it can be applied to the Crystallized pickaxe and the Reaper sword, giving them a new ability and reducing the cooldown of the tools abilities.
+
 ## How to install More Endgame mod?
 
 You can install it like any other mod in your [fabric loader](https://fabricmc.net/), but the mod requires the correct minecraft version present and [fabric api](https://modrinth.com/mod/fabric-api).
 
+(JEI/REI recommended if you don't know the crafting recipes or if you would like to see all items the mod has.)
 
 ## Extra Info
 
