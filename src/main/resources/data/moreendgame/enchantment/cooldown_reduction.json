@@ -1,0 +1,30 @@
+{
+  "description": {
+    "translate": "enchantment.moreendgame.cooldown_reduction",
+    "fallback": "Cooldown Reduction"
+  },
+  "supported_items": [
+    "moreendgame:reaper_sword",
+    "moreendgame:axe_of_the_trees",
+    "moreendgame:crystallized_pickaxe"
+  ],
+  "primary_items": [
+    "moreendgame:reaper_sword",
+    "moreendgame:axe_of_the_trees",
+    "moreendgame:crystallized_pickaxe"
+  ],
+  "weight": 10,
+  "max_level": 3,
+  "min_cost": {
+    "base": 15,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 30,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 10,
+  "slots": [
+    "mainhand"
+  ]
+}

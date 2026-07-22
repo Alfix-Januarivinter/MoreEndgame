@@ -42,7 +42,7 @@
 </details>
 
 <details>
-<summary>Reaper Sword</summary>
+<summary>Crystallized Pickaxe</summary>
   
 - Damage: 8 (Netherite: 6)
   
@@ -93,4 +93,4 @@ You can install it like any other mod in your [fabric loader](https://fabricmc.n
 If you got issues or questions **[join my discord server](https://discord.com/invite/ETTr37p38R)**!
 
 ## License
-This pack is available under the [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). You are free to use it in accordance with the terms listed there.
+This mod is available under the [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). You are free to use it in accordance with the terms listed there.
