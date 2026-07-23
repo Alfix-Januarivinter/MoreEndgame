@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": "minecraft:netherite_sword",
-    "U": "moreendgame:undead_spirit"
+    "S": "minecraft:paper",
+    "U": "moreendgame:tree_heart"
   },
   "pattern": [
     "UUU",
@@ -11,6 +11,6 @@
     "UUU"
   ],
   "result": {
-    "id": "moreendgame:reaper_sword"
+    "id": "moreendgame:tree_scroll"
   }
 }

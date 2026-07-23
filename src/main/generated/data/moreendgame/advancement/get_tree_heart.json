@@ -16,7 +16,6 @@
     "background": "minecraft:gui/advancements/backgrounds/adventure",
     "description": "Wait I didn't know trees had hearts",
     "icon": {
-      "count": 1,
       "id": "moreendgame:tree_heart"
     },
     "title": "Your First Tree Heart"

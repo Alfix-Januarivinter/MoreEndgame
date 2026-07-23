@@ -1,7 +1,7 @@
 package com.alfixjanuarivinter.moreendgame.client.datagen;
 
 import com.alfixjanuarivinter.moreendgame.Items.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
-    public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -46,6 +46,33 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("UUU")
                         .define('S', Items.NETHERITE_PICKAXE)
                         .define('U', ModItems.CRYSTALLIZED_GEM)
+                        .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.REAPER_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.UNDEAD_SPIRIT)
+                        .define('S', Items.PAPER)
+                        .unlockedBy(getHasName(ModItems.UNDEAD_SPIRIT), has(ModItems.UNDEAD_SPIRIT))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.TREE_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.TREE_HEART)
+                        .define('S', Items.PAPER)
+                        .unlockedBy(getHasName(ModItems.TREE_HEART), has(ModItems.TREE_HEART))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.CRYSTALLIZED_SCROLL)
+                        .pattern("UUU")
+                        .pattern("USU")
+                        .pattern("UUU")
+                        .define('U', ModItems.CRYSTALLIZED_GEM)
+                        .define('S', Items.PAPER)
                         .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
                         .save(output);
 

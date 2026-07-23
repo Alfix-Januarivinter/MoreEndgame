@@ -1,0 +1,55 @@
+{
+  "parent": "moreendgame:get_crystallized_gem",
+  "criteria": {
+    "got_axe_of_the_trees": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:axe_of_the_trees"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "got_crystallized_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:crystallized_pickaxe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "got_reaper_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": "moreendgame:reaper_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Got all 3 Ultimate tools",
+    "frame": "challenge",
+    "icon": {
+      "id": "moreendgame:reaper_sword"
+    },
+    "title": "Unstoppable player"
+  },
+  "requirements": [
+    [
+      "got_reaper_sword"
+    ],
+    [
+      "got_axe_of_the_trees"
+    ],
+    [
+      "got_crystallized_pickaxe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -15,7 +15,6 @@
     "background": "minecraft:gui/advancements/backgrounds/adventure",
     "description": "I wounder what power it possesses",
     "icon": {
-      "count": 1,
       "id": "moreendgame:undead_spirit"
     },
     "title": "Your First Undead Spirit"
