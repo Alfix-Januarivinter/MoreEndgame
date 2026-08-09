@@ -15,9 +15,9 @@
  
 - Durability: 4062 (Netherite: 2031)
 
-- Crafted from 8 Undead spirits and 1 Netherite sword
+- Crafted from 1 Reaper scroll, 1 Netherite Upgrade Template and 1 Netherite sword (in a smithing table)
   
-![Reaper sword crafting recipe image](https://cdn.modrinth.com/data/cached_images/1dceadd2df77a671e06319ce4ec521f36e9c9384.png)
+![Reaper sword recipe](https://cdn.modrinth.com/data/cached_images/74a5bd9c6f2707a58b45e716c875bf325dbd22dc.png)
 
 - Reaper Sword has a swing ability that activates when right clicking and damages all mobs 5 blocks around the player with 15 damage and generates particles, it has a cooldown of 600 ticks (30 secounds) and takes 30 durability of the sword.
 
@@ -33,9 +33,9 @@
  
 - Mining speed: 15 (Netherite: 9)
 
-- Crafted from 8 Tree hearts and 1 Netherite axe
-  
-![Axe of The Trees recipe image](https://cdn.modrinth.com/data/cached_images/d06111661854ca38f1488f1c21cf7f67d505ae18.png)
+- Crafted from 1 Tree scroll, 1 Netherite Upgrade Template and 1 Netherite axe (in a smithing table)
+
+![Axe of the trees recipe](https://cdn.modrinth.com/data/cached_images/0a8f037b5a9e57ca883737de2e9927788a38aa98.png)
 
 - Axe Of The Trees has a tree cutting ability that when shift right clicking cuts down the whole tree infront of the player, it has a max log count of 256, and a cooldown of 600 ticks (30 secounds) and it takes as much durability from the tool as chopping the tree down would.
   
@@ -52,9 +52,9 @@
  
 - Mining speed: 16 (Netherite: 9)
 
-- Crafted from 8 Crystallized gems and 1 Netherite pickaxe
+- Crafted from 1 Crystallized scroll, 1 Netherite Upgrade Template and 1 Netherite pickaxe (in a smithing table)
   
-![Crystallized Pickaxe recipe image](https://cdn.modrinth.com/data/cached_images/977b795777b9cef3f895aedef26ba6869f9feeba.png)
+![Crystallized pickaxe recipe](https://cdn.modrinth.com/data/cached_images/61023bcaf7d024e3c28074eb854383245447c4d1.png)
 
 - Crystallized Pickaxe has a mining ability that when shift right clicking mines a 4x4x4 hole infront of the player, it has a cooldown of 200 ticks (10 secounds), and takes as much durability of the tool as mining all of those blocks would, it can't mine any block that mining manually couldn't.
 
@@ -81,15 +81,27 @@ The mod also has advancements!
 
 **Each Tool has each own scroll!**
 
-Reaper sword has Reaper scroll.
+**Reaper sword has Reaper scroll.**
+
+- Crafted from 8 Undead spirits and 1 paper
+
+It is used to craft the Reaper sword and can be applied to other tools and give them an ability.
 
 It can't be applied to the Reaper sword, because it already has the ability. But it can be applied to the Crystallized pickaxe and the Axe of the Trees, giving them a new ability and reducing the cooldown of the tools abilities.
 
-Crystallized pickaxe has Crystallized scroll.
+**Crystallized pickaxe has Crystallized scroll.**
+
+- Crafted from 8 Crystallized gems and 1 paper
+
+It is used to craft the Crystallized pickaxe and can be applied to other tools and give them an ability.
 
 It can't be applied to the Crystallized pickaxe, because it already has the ability. But it can be applied to the Reaper Sword and the Axe of the Trees, giving them a new ability and reducing the cooldown of the tools abilities.
 
-Axe of the Trees has Tree scroll.
+**Axe of the Trees has Tree scroll.**
+
+- Crafted from 8 Tree hearts and 1 paper
+
+It is used to craft the Axe of the trees and can be applied to other tools and give them an ability.
 
 It can't be applied to the Axe of the Trees, because it already has the ability. But it can be applied to the Crystallized pickaxe and the Reaper sword, giving them a new ability and reducing the cooldown of the tools abilities.
 
