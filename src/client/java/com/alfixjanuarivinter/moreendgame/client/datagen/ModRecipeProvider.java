@@ -7,7 +7,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,36 +20,41 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+    public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
         return new RecipeProvider(registries, output) {
+
             @Override
             public void buildRecipes() {
-                shaped(RecipeCategory.COMBAT , ModItems.REAPER_SWORD)
-                        .pattern("UUU")
-                        .pattern("USU")
-                        .pattern("UUU")
-                        .define('S', Items.NETHERITE_SWORD)
-                        .define('U', ModItems.UNDEAD_SPIRIT)
-                        .unlockedBy(getHasName(ModItems.UNDEAD_SPIRIT), has(ModItems.UNDEAD_SPIRIT))
-                        .save(output);
 
-                shaped(RecipeCategory.TOOLS, ModItems.AXE_OF_THE_TREES)
-                        .pattern("UUU")
-                        .pattern("USU")
-                        .pattern("UUU")
-                        .define('S', Items.NETHERITE_AXE)
-                        .define('U', ModItems.TREE_HEART)
-                        .unlockedBy(getHasName(ModItems.TREE_HEART), has(ModItems.TREE_HEART))
-                        .save(output);
+                SmithingTransformRecipeBuilder.smithing(
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(Items.NETHERITE_PICKAXE),
+                                Ingredient.of(ModItems.CRYSTALLIZED_SCROLL),
+                                RecipeCategory.TOOLS,
+                                ModItems.CRYSTALLIZED_PICKAXE
+                        )
+                        .unlocks(getHasName(ModItems.CRYSTALLIZED_SCROLL), has(ModItems.CRYSTALLIZED_SCROLL))
+                        .save(output, getItemName(ModItems.CRYSTALLIZED_PICKAXE) + "_smithing");
 
-                shaped(RecipeCategory.TOOLS, ModItems.CRYSTALLIZED_PICKAXE)
-                        .pattern("UUU")
-                        .pattern("USU")
-                        .pattern("UUU")
-                        .define('S', Items.NETHERITE_PICKAXE)
-                        .define('U', ModItems.CRYSTALLIZED_GEM)
-                        .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
-                        .save(output);
+                SmithingTransformRecipeBuilder.smithing(
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(Items.NETHERITE_SWORD),
+                                Ingredient.of(ModItems.REAPER_SCROLL),
+                                RecipeCategory.TOOLS,
+                                ModItems.REAPER_SWORD
+                        )
+                        .unlocks(getHasName(ModItems.REAPER_SCROLL), has(ModItems.REAPER_SCROLL))
+                        .save(output, getItemName(ModItems.REAPER_SWORD) + "_smithing");
+
+                SmithingTransformRecipeBuilder.smithing(
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(Items.NETHERITE_AXE),
+                                Ingredient.of(ModItems.TREE_SCROLL),
+                                RecipeCategory.TOOLS,
+                                ModItems.AXE_OF_THE_TREES
+                        )
+                        .unlocks(getHasName(ModItems.TREE_SCROLL), has(ModItems.TREE_SCROLL))
+                        .save(output, getItemName(ModItems.AXE_OF_THE_TREES) + "_smithing");
 
                 shaped(RecipeCategory.TOOLS, ModItems.REAPER_SCROLL)
                         .pattern("UUU")
@@ -75,13 +82,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .define('S', Items.PAPER)
                         .unlockedBy(getHasName(ModItems.CRYSTALLIZED_GEM), has(ModItems.CRYSTALLIZED_GEM))
                         .save(output);
-
             }
         };
     }
 
     @Override
     public String getName() {
-        return "More Endgame Recipes";
+        return "MoreEndgame Recipes";
     }
 }

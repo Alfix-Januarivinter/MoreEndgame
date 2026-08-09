@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "moreendgame:axe_of_the_trees"
+        "recipe": "moreendgame:axe_of_the_trees_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_tree_heart": {
+    "has_tree_scroll": {
       "conditions": {
         "items": [
           {
-            "items": "moreendgame:tree_heart"
+            "items": "moreendgame:tree_scroll"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_tree_heart"
+      "has_tree_scroll"
     ]
   ],
   "rewards": {
     "recipes": [
-      "moreendgame:axe_of_the_trees"
+      "moreendgame:axe_of_the_trees_smithing"
     ]
   }
 }

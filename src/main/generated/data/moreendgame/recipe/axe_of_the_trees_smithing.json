@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "moreendgame:tree_scroll",
+  "base": "minecraft:netherite_axe",
+  "result": {
+    "id": "moreendgame:axe_of_the_trees"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}
