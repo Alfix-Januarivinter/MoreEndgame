@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 
 public class AxeOfTheTreesItem extends AxeItem {
 
-    private static final int BASE_COOLDOWN = 600;
+    private static final int BASE_COOLDOWN = 200;
 
     public AxeOfTheTreesItem(ToolMaterial material, float attackDamage, float attackSpeed, Properties properties) {
         super(material, attackDamage, attackSpeed, properties);
@@ -45,7 +45,6 @@ public class AxeOfTheTreesItem extends AxeItem {
         var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
 
-        // UPDATED: Mapped to unified lower-case keys
         boolean hasLeafScroll = tag.getBoolean("hascrystallizedscroll").orElse(false);
         boolean hasPlankScroll = tag.getBoolean("hasreaperscroll").orElse(false);
 

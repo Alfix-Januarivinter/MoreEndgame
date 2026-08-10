@@ -16,7 +16,6 @@ public class CooldownHelper {
                     Identifier.fromNamespaceAndPath(MoreEndgame.MOD_ID, "cooldown_reduction"));
 
     public static int getModifiedCooldown(Level level, ItemStack stack, int baseCooldown) {
-        // Safe context-based lookup that handles both singleplayer servers and client instances
         var registry = level.registryAccess().lookup(Registries.ENCHANTMENT).orElse(null);
         if (registry == null) return baseCooldown;
 

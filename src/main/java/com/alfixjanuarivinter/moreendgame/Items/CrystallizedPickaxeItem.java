@@ -67,7 +67,6 @@ public class CrystallizedPickaxeItem extends Item {
         var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
 
-        // UPDATED: Mapped to unified lower-case keys
         boolean hasReaperScroll = tag.getBoolean("hasreaperscroll").orElse(false);
         boolean hasTreeScroll = tag.getBoolean("hastreescroll").orElse(false);
 
