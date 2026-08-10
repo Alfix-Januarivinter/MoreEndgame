@@ -61,11 +61,11 @@
 </details>
 
 The mod also adds each tools item and recipe.
-- Undead spirit (Needed to craft Reaper sword) It can be obtained from a 1/1000 chance from zombies (zombie villagers not included)
+- Undead spirit (Needed to craft Reaper sword) It can be obtained from a 1/500 chance from all undead mobs (basically all mobs that are effected by smite).
 
-- Tree heart (Needed to craft Axe of the trees) It can be obtained from a 1/1000 chance when mining any log (nether logs and stripped logs not included)
+- Tree heart (Needed to craft Axe of the trees) It can be obtained from a 1/300 chance when mining any log (nether logs and stripped logs not included).
 
-- Crystallized gem (Needed to craft Crystallized pickaxe) It can be obtained from a 1/1000 chance when mining stone or ores (not including nether ores, but including deepslate and deepslate ore variants)
+- Crystallized gem (Needed to craft Crystallized pickaxe) It can be obtained from a 1/5000 chance when mining stone/deepslate and a 1/500 chance from ores and a 1/100 chance from diamonds and emeralds (not including nether ores, but including deepslate ore variants).
 
 Each tool also has each own ability.
 
