@@ -1,3 +1,4 @@
+
 package com.alfixjanuarivinter.moreendgame.Items;
 
 import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
@@ -18,6 +19,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -43,13 +46,18 @@ public class ReaperSwordItem extends Item {
             return InteractionResult.PASS;
         }
 
-        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+        var customData = stack.getOrDefault(
+                DataComponents.CUSTOM_DATA,
+                CustomData.EMPTY
+        );
         CompoundTag tag = customData.copyTag();
 
         boolean hasRegen = tag.getBoolean("hascrystallizedscroll").orElse(false);
         boolean hasTeleport = tag.getBoolean("hastreescroll").orElse(false);
 
-        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        int cooldown = CooldownHelper.getModifiedCooldown(
+                level, stack, BASE_COOLDOWN
+        );
 
         float scrollMultiplier = 1.0f;
         if (hasRegen) scrollMultiplier -= 0.15f;
@@ -63,9 +71,12 @@ public class ReaperSwordItem extends Item {
             Vec3 targetPos = player.position().add(lookAngle.scale(8.0));
 
             var pickResult = level.clip(new net.minecraft.world.level.ClipContext(
-                    player.getEyePosition(), targetPos,
+                    player.getEyePosition(),
+                    targetPos,
                     net.minecraft.world.level.ClipContext.Block.COLLIDER,
-                    net.minecraft.world.level.ClipContext.Fluid.NONE, player));
+                    net.minecraft.world.level.ClipContext.Fluid.NONE,
+                    player
+            ));
 
             if (pickResult.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK) {
                 targetPos = pickResult.getLocation().subtract(lookAngle.scale(0.5));
@@ -77,58 +88,102 @@ public class ReaperSwordItem extends Item {
         }
 
         if (level.isClientSide()) {
-            player.swing(hand);
+            player.swing(hand, SwingAnimation.DEFAULT, true);
             return InteractionResult.SUCCESS;
         }
 
         int currentRadius = hasRegen ? 7 : 5;
 
         AABB area = player.getBoundingBox().inflate(currentRadius);
-        level.getEntitiesOfClass(LivingEntity.class, area,
-                        entity -> entity != player && entity.isAlive())
-                .forEach(entity -> {
-                    entity.hurt(level.damageSources().playerAttack(player), SWEEP_DAMAGE);
-                });
+        level.getEntitiesOfClass(
+                        LivingEntity.class,
+                        area,
+                        entity -> entity != player && entity.isAlive()
+                )
+                .forEach(entity ->
+                        entity.hurt(
+                                level.damageSources().playerAttack(player),
+                                SWEEP_DAMAGE
+                        )
+                );
 
         if (hasRegen) {
-            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 80, 1));
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.REGENERATION, 80, 1
+            ));
         }
 
-        stack.hurtAndBreak(DURABILITY_COST, player, EquipmentSlot.MAINHAND);
+        stack.hurtAndBreak(
+                DURABILITY_COST, player, EquipmentSlot.MAINHAND
+        );
 
         // Sound & Particles
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound(
+                null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                SoundEvents.PLAYER_ATTACK_SWEEP,
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
 
         if (player instanceof ServerPlayer serverPlayer) {
             SweepParticlePacket.sendToAll(serverPlayer);
         }
 
-        player.swing(hand);
+        player.swing(hand, SwingAnimation.DEFAULT, true);
         return InteractionResult.CONSUME;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
-        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+    public void appendHoverText(
+            ItemStack stack,
+            Item.TooltipContext context,
+            TooltipDisplay displayComponent,
+            Consumer<Component> textConsumer,
+            TooltipFlag tooltipFlag
+    ) {
+        var customData = stack.getOrDefault(
+                DataComponents.CUSTOM_DATA,
+                CustomData.EMPTY
+        );
         CompoundTag tag = customData.copyTag();
 
         boolean hasRegen = tag.getBoolean("hascrystallizedscroll").orElse(false);
         boolean hasTeleport = tag.getBoolean("hastreescroll").orElse(false);
 
         if (hasRegen || hasTeleport) {
-            textConsumer.accept(Component.literal("Applied Upgrades:").withStyle(ChatFormatting.GOLD));
+            textConsumer.accept(
+                    Component.literal("Applied Upgrades:")
+                            .withStyle(ChatFormatting.GOLD)
+            );
 
             if (hasRegen) {
-                textConsumer.accept(Component.literal(" - Crystallized Scroll Upgrade (+ 1 Block Radius & Health Regen)").withStyle(ChatFormatting.AQUA));
+                textConsumer.accept(
+                        Component.literal(
+                                " - Crystallized Scroll Upgrade (+ 1 Block Radius & Health Regen)"
+                        ).withStyle(ChatFormatting.AQUA)
+                );
             }
+
             if (hasTeleport) {
-                textConsumer.accept(Component.literal(" - Tree Scroll Upgrade (Teleportation)").withStyle(ChatFormatting.GREEN));
+                textConsumer.accept(
+                        Component.literal(
+                                " - Tree Scroll Upgrade (Teleportation)"
+                        ).withStyle(ChatFormatting.GREEN)
+                );
             }
         } else {
-            textConsumer.accept(Component.literal("No upgrades applied.").withStyle(ChatFormatting.GRAY));
+            textConsumer.accept(
+                    Component.literal("No upgrades applied.")
+                            .withStyle(ChatFormatting.GRAY)
+            );
         }
 
-        super.appendHoverText(stack, context, displayComponent, textConsumer, tooltipFlag);
+        super.appendHoverText(
+                stack, context, displayComponent, textConsumer, tooltipFlag
+        );
     }
 }

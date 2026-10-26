@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "moreendgame:axe_of_the_trees_smithing"
+        "recipes": "moreendgame:axe_of_the_trees_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

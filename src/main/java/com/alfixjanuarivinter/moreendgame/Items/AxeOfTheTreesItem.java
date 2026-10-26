@@ -1,3 +1,4 @@
+
 package com.alfixjanuarivinter.moreendgame.Items;
 
 import com.alfixjanuarivinter.moreendgame.enchantment.CooldownHelper;
@@ -9,25 +10,29 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 import java.util.function.Consumer;
 
-public class AxeOfTheTreesItem extends AxeItem {
+public class AxeOfTheTreesItem extends Item {
 
     private static final int BASE_COOLDOWN = 200;
 
-    public AxeOfTheTreesItem(ToolMaterial material, float attackDamage, float attackSpeed, Properties properties) {
-        super(material, attackDamage, attackSpeed, properties);
+    public AxeOfTheTreesItem(Item.Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -42,7 +47,10 @@ public class AxeOfTheTreesItem extends AxeItem {
             return InteractionResult.PASS;
         }
 
-        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+        var customData = stack.getOrDefault(
+                DataComponents.CUSTOM_DATA,
+                CustomData.EMPTY
+        );
         CompoundTag tag = customData.copyTag();
 
         boolean hasLeafScroll = tag.getBoolean("hascrystallizedscroll").orElse(false);
@@ -70,11 +78,17 @@ public class AxeOfTheTreesItem extends AxeItem {
                 BlockPos current = queue.poll();
                 targets.add(current);
 
-                for (BlockPos neighbor : BlockPos.betweenClosed(current.offset(-1, -1, -1), current.offset(1, 1, 1))) {
+                for (BlockPos neighbor : BlockPos.betweenClosed(
+                        current.offset(-1, -1, -1),
+                        current.offset(1, 1, 1)
+                )) {
                     BlockPos immutableNeighbor = neighbor.immutable();
+
                     if (!visited.contains(immutableNeighbor)) {
                         BlockState neighborState = level.getBlockState(immutableNeighbor);
-                        boolean match = isLog ? neighborState.is(BlockTags.LOGS) : neighborState.is(BlockTags.PLANKS);
+                        boolean match = isLog
+                                ? neighborState.is(BlockTags.LOGS)
+                                : neighborState.is(BlockTags.PLANKS);
 
                         if (match) {
                             visited.add(immutableNeighbor);
@@ -98,10 +112,16 @@ public class AxeOfTheTreesItem extends AxeItem {
 
                 while (!leafQueue.isEmpty() && leafCount < 256) {
                     BlockPos currentLeaf = leafQueue.poll();
-                    for (BlockPos neighbor : BlockPos.betweenClosed(currentLeaf.offset(-1, -1, -1), currentLeaf.offset(1, 1, 1))) {
+
+                    for (BlockPos neighbor : BlockPos.betweenClosed(
+                            currentLeaf.offset(-1, -1, -1),
+                            currentLeaf.offset(1, 1, 1)
+                    )) {
                         BlockPos immutableNeighbor = neighbor.immutable();
+
                         if (!leafVisited.contains(immutableNeighbor)) {
                             BlockState neighborState = level.getBlockState(immutableNeighbor);
+
                             if (neighborState.is(BlockTags.LEAVES)) {
                                 leafVisited.add(immutableNeighbor);
                                 leafQueue.add(immutableNeighbor);
@@ -114,7 +134,10 @@ public class AxeOfTheTreesItem extends AxeItem {
             }
         }
 
-        int cooldown = CooldownHelper.getModifiedCooldown(level, stack, BASE_COOLDOWN);
+        int cooldown = CooldownHelper.getModifiedCooldown(
+                level, stack, BASE_COOLDOWN
+        );
+
         float scrollMultiplier = 1.0f;
         if (hasLeafScroll) scrollMultiplier -= 0.15f;
         if (hasPlankScroll) scrollMultiplier -= 0.15f;
@@ -127,26 +150,52 @@ public class AxeOfTheTreesItem extends AxeItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
-        var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY);
+    public void appendHoverText(
+            ItemStack stack,
+            Item.TooltipContext context,
+            TooltipDisplay displayComponent,
+            Consumer<Component> textConsumer,
+            TooltipFlag tooltipFlag
+    ) {
+        var customData = stack.getOrDefault(
+                DataComponents.CUSTOM_DATA,
+                CustomData.EMPTY
+        );
         CompoundTag tag = customData.copyTag();
 
         boolean hasLeafScroll = tag.getBoolean("hascrystallizedscroll").orElse(false);
         boolean hasPlankScroll = tag.getBoolean("hasreaperscroll").orElse(false);
 
         if (hasLeafScroll || hasPlankScroll) {
-            textConsumer.accept(Component.literal("Applied Upgrades:").withStyle(ChatFormatting.GOLD));
+            textConsumer.accept(
+                    Component.literal("Applied Upgrades:")
+                            .withStyle(ChatFormatting.GOLD)
+            );
 
             if (hasLeafScroll) {
-                textConsumer.accept(Component.literal(" - Crystallized Scroll Upgrade (Also destroys Leaves)").withStyle(ChatFormatting.GREEN));
+                textConsumer.accept(
+                        Component.literal(
+                                " - Crystallized Scroll Upgrade (Also destroys Leaves)"
+                        ).withStyle(ChatFormatting.GREEN)
+                );
             }
+
             if (hasPlankScroll) {
-                textConsumer.accept(Component.literal(" - Reaper Scroll Upgrade (Destroys Planks)").withStyle(ChatFormatting.AQUA));
+                textConsumer.accept(
+                        Component.literal(
+                                " - Reaper Scroll Upgrade (Destroys Planks)"
+                        ).withStyle(ChatFormatting.AQUA)
+                );
             }
         } else {
-            textConsumer.accept(Component.literal("No upgrades applied.").withStyle(ChatFormatting.GRAY));
+            textConsumer.accept(
+                    Component.literal("No upgrades applied.")
+                            .withStyle(ChatFormatting.GRAY)
+            );
         }
 
-        super.appendHoverText(stack, context, displayComponent, textConsumer, tooltipFlag);
+        super.appendHoverText(
+                stack, context, displayComponent, textConsumer, tooltipFlag
+        );
     }
 }

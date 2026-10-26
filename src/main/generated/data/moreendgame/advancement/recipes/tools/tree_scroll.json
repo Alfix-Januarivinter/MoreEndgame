@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "moreendgame:tree_scroll"
+        "recipes": "moreendgame:tree_scroll"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

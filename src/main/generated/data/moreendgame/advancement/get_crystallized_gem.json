@@ -13,7 +13,6 @@
     }
   },
   "display": {
-    "background": "minecraft:gui/advancements/backgrounds/adventure",
     "description": "Aren't diamonds crystallized gems",
     "icon": {
       "id": "moreendgame:crystallized_gem"

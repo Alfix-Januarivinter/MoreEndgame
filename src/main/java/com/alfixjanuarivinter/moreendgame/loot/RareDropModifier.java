@@ -5,11 +5,12 @@ import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.Set;
 
@@ -105,9 +106,9 @@ public class RareDropModifier {
     }
 
     // Helper method to keep loot pool creation clean and concise
-    private static LootPool createSingleItemPool(net.minecraft.world.item.Item item, float chance) {
+    private static LootPool createSingleItemPool(Item item, float chance) {
         return LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1))
+                .setRolls(ContextIntProviders.exactly(1))
                 .add(LootItem.lootTableItem(item))
                 .when(LootItemRandomChanceCondition.randomChance(chance))
                 .build();
