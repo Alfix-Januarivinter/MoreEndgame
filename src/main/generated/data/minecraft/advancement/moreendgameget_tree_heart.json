@@ -1,5 +1,5 @@
 {
-  "parent": "moreendgame:get_undead_spirit",
+  "parent": "minecraft:moreendgameget_undead_spirit",
   "criteria": {
     "got_tree_heart": {
       "conditions": {
@@ -14,7 +14,7 @@
   },
   "display": {
     "background": "minecraft:gui/advancements/backgrounds/adventure",
-    "description": "Wait I didn't know trees had hearts",
+    "description": "Wait, I didn't know trees had hearts",
     "icon": {
       "count": 1,
       "id": "moreendgame:tree_heart"

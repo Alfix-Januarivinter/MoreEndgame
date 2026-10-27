@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": "minecraft:netherite_axe",
-    "U": "moreendgame:tree_heart"
+    "S": "minecraft:paper",
+    "U": "moreendgame:crystallized_gem"
   },
   "pattern": [
     "UUU",
@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "moreendgame:axe_of_the_trees"
+    "id": "moreendgame:crystallized_scroll"
   }
 }

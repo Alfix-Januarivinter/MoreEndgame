@@ -18,7 +18,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"moreendgame" {
+		"more-endgame" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}

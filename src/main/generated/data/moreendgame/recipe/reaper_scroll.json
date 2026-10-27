@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": "minecraft:netherite_pickaxe",
-    "U": "moreendgame:crystallized_gem"
+    "S": "minecraft:paper",
+    "U": "moreendgame:undead_spirit"
   },
   "pattern": [
     "UUU",
@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "moreendgame:crystallized_pickaxe"
+    "id": "moreendgame:reaper_scroll"
   }
 }

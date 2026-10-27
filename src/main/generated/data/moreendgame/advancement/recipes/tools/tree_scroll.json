@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "moreendgame:axe_of_the_trees"
+        "recipe": "moreendgame:tree_scroll"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "moreendgame:axe_of_the_trees"
+      "moreendgame:tree_scroll"
     ]
   }
 }

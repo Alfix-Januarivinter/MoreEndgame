@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "moreendgame:crystallized_scroll",
+  "base": "minecraft:netherite_pickaxe",
+  "result": {
+    "id": "moreendgame:crystallized_pickaxe"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

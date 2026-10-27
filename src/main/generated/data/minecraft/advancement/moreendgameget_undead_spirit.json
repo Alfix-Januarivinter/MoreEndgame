@@ -1,11 +1,10 @@
 {
-  "parent": "moreendgame:get_tree_heart",
   "criteria": {
-    "got_crystallized_gem": {
+    "got_undead_spirit": {
       "conditions": {
         "items": [
           {
-            "items": "moreendgame:crystallized_gem"
+            "items": "moreendgame:undead_spirit"
           }
         ]
       },
@@ -14,16 +13,16 @@
   },
   "display": {
     "background": "minecraft:gui/advancements/backgrounds/adventure",
-    "description": "Aren't diamonds crystallized gems",
+    "description": "I wonder what power it possesses",
     "icon": {
       "count": 1,
-      "id": "moreendgame:crystallized_gem"
+      "id": "moreendgame:undead_spirit"
     },
-    "title": "Your First Crystallized Gem"
+    "title": "Your First Undead Spirit"
   },
   "requirements": [
     [
-      "got_crystallized_gem"
+      "got_undead_spirit"
     ]
   ],
   "sends_telemetry_event": true

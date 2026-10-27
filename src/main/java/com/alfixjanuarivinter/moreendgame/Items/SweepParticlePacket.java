@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public record SweepParticlePacket(double x, double y, double z, float yRot) implements CustomPacketPayload {
 
-    public static final Type<SweepParticlePacket> TYPE =
+    public static final CustomPacketPayload.Type<SweepParticlePacket> TYPE =
             new Type<>(Identifier.fromNamespaceAndPath("moreendgame", "sweep_particle"));
 
     public static final StreamCodec<FriendlyByteBuf, SweepParticlePacket> CODEC =

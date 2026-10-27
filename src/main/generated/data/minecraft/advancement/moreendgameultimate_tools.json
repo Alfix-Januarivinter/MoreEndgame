@@ -1,5 +1,5 @@
 {
-  "parent": "moreendgame:get_crystallized_gem",
+  "parent": "minecraft:moreendgameget_crystallized_gem",
   "criteria": {
     "got_axe_of_the_trees": {
       "conditions": {
@@ -33,7 +33,7 @@
     }
   },
   "display": {
-    "description": "Got all 3 Ultimate tools",
+    "description": "Got all 3 ultimate tools",
     "frame": "challenge",
     "icon": {
       "count": 1,
