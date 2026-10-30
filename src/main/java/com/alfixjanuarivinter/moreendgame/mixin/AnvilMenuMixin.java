@@ -32,11 +32,6 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
         ItemStack leftStack = this.inputSlots.getItem(0);
         ItemStack rightStack = this.inputSlots.getItem(1);
 
-        // System output to track if the anvil is even registering inputs
-        if (!leftStack.isEmpty() && !rightStack.isEmpty()) {
-            System.out.println("[MoreEndgame] Anvil checking: " + leftStack.getItem().toString() + " + " + rightStack.getItem().toString());
-        }
-
         if (leftStack.getItem() instanceof ReaperSwordItem ||
                 leftStack.getItem() instanceof AxeOfTheTreesItem ||
                 leftStack.getItem() instanceof CrystallizedPickaxeItem) {
